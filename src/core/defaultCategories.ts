@@ -160,5 +160,45 @@ export const DEFAULT_CATEGORIES: IElementCategory[] = [
         wrappings: null,
         isCustom: false,
         sortOrder: 19
+    },
+    {
+        id: "radar",
+        name: "Radar",
+        defaultWrapping: "radar-beta",
+        wrappings: null,
+        isCustom: false,
+        sortOrder: 20
+    },
+    {
+        id: "treemap",
+        name: "Treemap",
+        defaultWrapping: "treemap-beta",
+        wrappings: null,
+        isCustom: false,
+        sortOrder: 21
+    },
+    {
+        id: "venn",
+        name: "Venn",
+        defaultWrapping: "venn-beta",
+        wrappings: null,
+        isCustom: false,
+        sortOrder: 22
+    },
+    {
+        id: "ishikawa",
+        name: "Ishikawa",
+        defaultWrapping: "ishikawa-beta",
+        wrappings: null,
+        isCustom: false,
+        sortOrder: 23
+    },
+    {
+        id: "treeView",
+        name: "TreeView",
+        defaultWrapping: "treeView-beta",
+        wrappings: null,
+        isCustom: false,
+        sortOrder: 24
     }
 ];

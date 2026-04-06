@@ -78,3 +78,22 @@ export function makeMermaidRenderId(): string {
 	}
 	return `mermaid-tools-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
 }
+
+/**
+ * Venn lexer requires `union` to start a line. If `]` and `union` appear on the same line
+ * (e.g. `B["Design"]union A B`), the parser treats `union` as IDENTIFIER and fails.
+ * Also normalizes CRLF so line breaks are predictable.
+ */
+export function preprocessMermaidSourceForRender(source: string): string {
+	let s = source.replace(/\r\n/g, "\n");
+	s = s.replace(/\]([ \t]*)(union\b)/gi, "]\n$2");
+	return s;
+}
+
+export async function renderMermaidDiagram(
+	api: Mermaid,
+	id: string,
+	source: string
+): Promise<{ svg: string; bindFunctions?: (element: Element) => void }> {
+	return api.render(id, preprocessMermaidSourceForRender(source));
+}

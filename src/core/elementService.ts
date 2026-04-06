@@ -92,7 +92,8 @@ export class MermaidElementService {
             'flowchart', 'graph', 'sequenceDiagram', 'classDiagram', 'stateDiagram-v2', 
             'erDiagram', 'journey', 'gantt', 'pie', 'requirementDiagram', 'gitGraph',
             'mindmap', 'timeline', 'quadrantChart', 'C4Context', 'sankey-beta', 
-            'xychart-beta', 'packet-beta', 'kanban', 'block-beta', 'architecture-beta'
+            'xychart-beta', 'packet-beta', 'kanban', 'block-beta', 'architecture-beta',
+            'radar-beta', 'treemap-beta', 'venn-beta', 'ishikawa-beta', 'treeView-beta'
         ];
         
         if (!validDiagramTypes.includes(firstWord)) {

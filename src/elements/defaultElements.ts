@@ -1,6 +1,7 @@
 import { IMermaidElement } from "../core/IMermaidElement";
 import { architectureElements } from "./architecture";
 import { blockDiagramElements } from "./blockDiagram";
+import { ishikawaDiagramElements } from "./ishikawaDiagram";
 import { c4DiagramElements } from "./c4Diagram";
 import { classDiagramElements } from "./classDiagram";
 import { entityRelationshipDiagramElements } from "./entityRelationshipDiagram";
@@ -12,12 +13,16 @@ import { mindMapElements } from "./mindMap";
 import { packetElements } from "./packet";
 import { pieChartElements } from "./pieChart";
 import { quadrantElements } from "./quadrant";
+import { radarDiagramElements } from "./radarDiagram";
 import { requirementDiagramElements } from "./requirementDiagram";
 import { sankeyDiagramElements } from "./sankeyDiagram";
 import { sequenceDiagramElements } from "./sequenceDiagram";
 import { stateDiagramElements } from "./stateDiagram";
 import { timelineElements } from "./timeline";
+import { treeViewDiagramElements } from "./treeViewDiagram";
+import { treemapDiagramElements } from "./treemapDiagram";
 import { userJourneyDiagramElements } from "./userJourneyDiagram";
+import { vennDiagramElements } from "./vennDiagram";
 import { xyChartElements } from "./xyChart";
 
 export const defaultElements: IMermaidElement[] = [
@@ -40,5 +45,10 @@ export const defaultElements: IMermaidElement[] = [
     ...packetElements,
     ...kanbanElements,
     ...blockDiagramElements,
-    ...architectureElements
+    ...architectureElements,
+    ...radarDiagramElements,
+    ...treemapDiagramElements,
+    ...vennDiagramElements,
+    ...ishikawaDiagramElements,
+    ...treeViewDiagramElements,
 ]

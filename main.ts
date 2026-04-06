@@ -1,15 +1,20 @@
 import {  Editor, Plugin } from 'obsidian';
-import { getBundledMermaid, installBundledMermaidGlobal, makeMermaidRenderId } from 'src/mermaid/bundledMermaid';
+import { getBundledMermaid, installBundledMermaidGlobal, makeMermaidRenderId, renderMermaidDiagram } from 'src/mermaid/bundledMermaid';
 import { MermaidElementService } from 'src/core/elementService';
 import { TextEditorService } from 'src/core/textEditorService';
 import { architectureElements } from 'src/elements/architecture';
 import { blockDiagramElements } from 'src/elements/blockDiagram';
 import { c4DiagramElements } from 'src/elements/c4Diagram';
+import { ishikawaDiagramElements } from 'src/elements/ishikawaDiagram';
 import { kanbanElements } from 'src/elements/kanban';
 import { mindMapElements } from 'src/elements/mindMap';
 import { packetElements } from 'src/elements/packet';
 import { quadrantElements } from 'src/elements/quadrant';
+import { radarDiagramElements } from 'src/elements/radarDiagram';
 import { timelineElements } from 'src/elements/timeline';
+import { treeViewDiagramElements } from 'src/elements/treeViewDiagram';
+import { treemapDiagramElements } from 'src/elements/treemapDiagram';
+import { vennDiagramElements } from 'src/elements/vennDiagram';
 import { MermaidPluginSettings } from 'src/settings/settings';
 import { addTridentIcon } from 'src/trident-icon';
 import { MermaidToolsSettingsTab } from 'src/ui/settingsTab';
@@ -67,8 +72,7 @@ export default class MermaidPlugin extends Plugin {
 				el.empty();
 				const wrap = el.createDiv({ cls: "mermaid-tools-bundled-mermaid" });
 				try {
-					const m = bundledMermaid;
-					const { svg } = await m.render(makeMermaidRenderId(), source);
+					const { svg } = await renderMermaidDiagram(bundledMermaid, makeMermaidRenderId(), source);
 					wrap.innerHTML = svg;
 				} catch (err) {
 					const message = err instanceof Error ? err.message : String(err);
@@ -130,6 +134,26 @@ export default class MermaidPlugin extends Plugin {
 		if (!this.settings.elements.some(x => x.categoryId === "architecture")) {
 			this.settings.elements.push(...architectureElements);
 			console.log("[Mermaid Tools] added Architecture diagram elements");
+		}
+		if (!this.settings.elements.some(x => x.categoryId === "radar")) {
+			this.settings.elements.push(...radarDiagramElements);
+			console.log("[Mermaid Tools] added Radar diagram elements");
+		}
+		if (!this.settings.elements.some(x => x.categoryId === "treemap")) {
+			this.settings.elements.push(...treemapDiagramElements);
+			console.log("[Mermaid Tools] added Treemap diagram elements");
+		}
+		if (!this.settings.elements.some(x => x.categoryId === "venn")) {
+			this.settings.elements.push(...vennDiagramElements);
+			console.log("[Mermaid Tools] added Venn diagram elements");
+		}
+		if (!this.settings.elements.some(x => x.categoryId === "ishikawa")) {
+			this.settings.elements.push(...ishikawaDiagramElements);
+			console.log("[Mermaid Tools] added Ishikawa diagram elements");
+		}
+		if (!this.settings.elements.some(x => x.categoryId === "treeView")) {
+			this.settings.elements.push(...treeViewDiagramElements);
+			console.log("[Mermaid Tools] added TreeView diagram elements");
 		}
 	}
 

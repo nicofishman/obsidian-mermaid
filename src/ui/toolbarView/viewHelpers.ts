@@ -1,7 +1,7 @@
 import { IMermaidElement } from "src/core/IMermaidElement";
 import { CategoryService } from "src/core/categoryService";
 import { ButtonComponent, DropdownComponent } from "obsidian";
-import { getBundledMermaid } from "src/mermaid/bundledMermaid";
+import { getBundledMermaid, preprocessMermaidSourceForRender, renderMermaidDiagram } from "src/mermaid/bundledMermaid";
 import { MermaidElementService } from "src/core/elementService";
 import { MermaidToolbarButton } from "./mermaidToolbarButtons";
 
@@ -83,9 +83,9 @@ async function recreateElementsSection(
         filteredSortedItems.forEach(async (elem, index) => {
             const el = createToolbarElement(sectionContainer);
             el.id = `mermaid-toolbar-element-${elem.categoryId}-${index}`;
-            const diagram = elemService.wrapAsCompleteDiagram(elem);
-            console.log(mermaid.detectType(diagram));
-            const {svg} = await mermaid.render(el.id, diagram);
+            const rawDiagram = elemService.wrapAsCompleteDiagram(elem);
+            console.log(mermaid.detectType(preprocessMermaidSourceForRender(rawDiagram)));
+            const { svg } = await renderMermaidDiagram(mermaid, el.id, rawDiagram);
             el.title = elem.description;
             el.innerHTML = svg;
             el.onclick = (e) => onElClick(elem.content);

@@ -202,5 +202,41 @@ columns 1
     db:L -- R:server
     disk1:T -- B:server
     disk2:T -- B:db
-`
+`,
+
+      Radar: `radar-beta
+title Skills comparison
+axis Speed, Quality, Cost, Scope, Risk
+curve teamA{8, 7, 6, 5, 8}
+curve teamB{6, 8, 7, 9, 6}`,
+
+      Treemap: `treemap-beta
+"Products"
+    "North": 40
+    "South"
+      "East": 25
+      "West": 35
+"Services"
+    "Consulting": 30`,
+
+      Venn: `venn-beta
+  title "Team overlap"
+  set Frontend
+  set Backend
+  union Frontend,Backend["APIs"]`,
+
+      Ishikawa: `ishikawa-beta
+Blurry Photo
+Process
+    Out of focus
+    Shutter speed too slow
+User
+    Shaky hands`,
+
+      TreeView: `treeView-beta
+    "<folder name>"
+        "<file name>"
+        "<folder name>"
+            "<file name>"
+    "<file-name>"`
 }
