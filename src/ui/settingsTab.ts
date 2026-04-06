@@ -1,5 +1,6 @@
 import MermaidPlugin from "main";
-import { App, PluginSettingTab, Setting, loadMermaid } from "obsidian";
+import { App, PluginSettingTab, Setting } from "obsidian";
+import { getBundledMermaid } from "src/mermaid/bundledMermaid";
 import { IMermaidElement } from "src/core/IMermaidElement";
 import { EditMermaidElementModal } from "./editMermaidElementModal";
 import { EditCategoryModal } from "./editCategoryModal";
@@ -18,7 +19,7 @@ export class MermaidToolsSettingsTab extends PluginSettingTab {
 }
 
 async function renderSettings(containerEl: HTMLElement, plugin: MermaidPlugin) {
-    const mermaid = await loadMermaid();
+    const mermaid = await getBundledMermaid();
     const categoryService = CategoryService.getInstance();
     
     // Load custom categories into category service

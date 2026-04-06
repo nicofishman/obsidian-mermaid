@@ -1,4 +1,5 @@
 import {  Editor, Plugin } from 'obsidian';
+import { getBundledMermaid, installBundledMermaidGlobal, makeMermaidRenderId } from 'src/mermaid/bundledMermaid';
 import { MermaidElementService } from 'src/core/elementService';
 import { TextEditorService } from 'src/core/textEditorService';
 import { architectureElements } from 'src/elements/architecture';
@@ -53,6 +54,32 @@ export default class MermaidPlugin extends Plugin {
 		});
 
 		this.addSettingTab(new MermaidToolsSettingsTab(this.app, this));
+
+		const bundledMermaid = await getBundledMermaid();
+		installBundledMermaidGlobal(bundledMermaid);
+
+		// Re-render ` ```mermaid ` blocks with bundled Mermaid 11.14+ so newer diagram types
+		// (e.g. ishikawa-beta) work in Reading view. Must run after Obsidian's built-in mermaid
+		// so we replace its output (very high sortOrder = last).
+		this.registerMarkdownCodeBlockProcessor(
+			"mermaid",
+			async (source, el) => {
+				el.empty();
+				const wrap = el.createDiv({ cls: "mermaid-tools-bundled-mermaid" });
+				try {
+					const m = bundledMermaid;
+					const { svg } = await m.render(makeMermaidRenderId(), source);
+					wrap.innerHTML = svg;
+				} catch (err) {
+					const message = err instanceof Error ? err.message : String(err);
+					wrap.createEl("pre", {
+						cls: "mermaid-tools-mermaid-error",
+						text: message,
+					});
+				}
+			},
+			Number.MAX_SAFE_INTEGER
+		);
     }
 
     async onunload(): Promise<void> {

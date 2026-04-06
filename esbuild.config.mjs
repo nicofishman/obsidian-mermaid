@@ -17,6 +17,7 @@ esbuild.build({
 	},
 	entryPoints: ['main.ts'],
 	bundle: true,
+	platform: "browser",
 	external: [
 		'obsidian',
 		'electron',

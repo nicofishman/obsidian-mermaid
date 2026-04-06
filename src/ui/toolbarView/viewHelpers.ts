@@ -1,6 +1,7 @@
 import { IMermaidElement } from "src/core/IMermaidElement";
 import { CategoryService } from "src/core/categoryService";
-import { ButtonComponent, DropdownComponent, loadMermaid } from "obsidian";
+import { ButtonComponent, DropdownComponent } from "obsidian";
+import { getBundledMermaid } from "src/mermaid/bundledMermaid";
 import { MermaidElementService } from "src/core/elementService";
 import { MermaidToolbarButton } from "./mermaidToolbarButtons";
 
@@ -75,7 +76,7 @@ async function recreateElementsSection(
 {
         sectionContainer.innerHTML = '';
         const elemService = new MermaidElementService();
-        const mermaid = await loadMermaid();
+        const mermaid = await getBundledMermaid();
 
         const filteredSortedItems = items.filter(i => i.categoryId === categoryId).sort((a, b) => a.sortingOrder - b.sortingOrder);
         

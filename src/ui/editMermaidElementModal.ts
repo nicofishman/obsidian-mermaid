@@ -1,5 +1,6 @@
 import MermaidPlugin from "main";
-import { App, Modal, loadMermaid } from "obsidian";
+import { App, Modal } from "obsidian";
+import { getBundledMermaid } from "src/mermaid/bundledMermaid";
 import { IMermaidElement } from "src/core/IMermaidElement";
 import { CategoryService } from "src/core/categoryService";
 
@@ -24,7 +25,7 @@ export class EditMermaidElementModal extends Modal {
         const renderEl = renderContainerEl.createEl("pre", {text: "rendered diagram"});
 
         if (!this._mermaid)
-            this._mermaid = await loadMermaid();
+            this._mermaid = await getBundledMermaid();
 
         renderEl.id = "mermaid-edit-element-modal"
 

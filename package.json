@@ -19,6 +19,9 @@
 		"esbuild": "0.14.47",
 		"obsidian": "^1.8",
 		"tslib": "2.4.0",
-		"typescript": "4.7.4"
+		"typescript": "~5.4.5"
+	},
+	"dependencies": {
+		"mermaid": "11.14.0"
 	}
 }
