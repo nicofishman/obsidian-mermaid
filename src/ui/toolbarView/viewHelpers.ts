@@ -88,7 +88,7 @@ async function recreateElementsSection(
             const { svg } = await renderMermaidDiagram(mermaid, el.id, rawDiagram);
             el.title = elem.description;
             el.innerHTML = svg;
-            el.onclick = (e) => onElClick(elem.content);
+            el.onclick = () => onElClick(elemService.getPasteBlockForElement(elem));
             sectionContainer.appendChild(el);
         }); 
 }

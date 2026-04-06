@@ -102,4 +102,17 @@ export class MermaidElementService {
         
         return wrappedContent;
     }
+
+    /**
+     * Text inserted when a toolbar example is clicked: fenced `mermaid` block, a name line
+     * (Mermaid `%%` comment so the parser still sees valid diagram syntax), then the same
+     * diagram source used for the preview (see wrapAsCompleteDiagram).
+     */
+    public getPasteBlockForElement(element: IMermaidElement): string {
+        const category = this.categoryService.getCategoryById(element.categoryId);
+        const diagramName = (category?.name ?? element.description ?? "Diagram").trim();
+        const body = this.wrapAsCompleteDiagram(element);
+        const inner = `%% ${diagramName}\n${body}`;
+        return this.wrapForPastingIntoEditor(this.wrapWithMermaidBlock(inner));
+    }
 }
